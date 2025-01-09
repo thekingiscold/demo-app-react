@@ -1,0 +1,32 @@
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 35px;
+  border: 4px solid black;
+  border-radius: 20px;
+  justify-content: center;
+  margin: 6px;
+}
+
+select {
+  color: black;
+  font-size: larger;
+  background-color: white;
+  border-color: white;
+  border: 0px;
+  margin: 8px;
+  font-weight: 800;
+}
+
+select:focus {
+  outline: none;
+}
+
+option {
+  color: red;
+}
+
+label {
+  height: 0px;
+}
