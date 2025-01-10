@@ -1,7 +1,7 @@
 .dropdown-container {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100px;
   height: 35px;
   border: 4px solid black;
   border-radius: 20px;
@@ -10,9 +10,9 @@
 }
 
 select {
-  color: black;
+  color: white;
   font-size: larger;
-  background-color: white;
+  background-color:  #751aff;
   border-color: white;
   border: 0px;
   margin: 8px;
