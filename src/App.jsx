@@ -1,17 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Dropdown from './components/Dropdown'
-import { options, options2, monthDayMap } from './constants/dropDownConstants'
+import { months, year, monthDayMap } from './constants/dropDownConstants'
 
 function App() {
    
-  const [monthValue, setMonthValue] = useState(0)
-
-  const [yearValue, setYearValue] = useState(0)
-
-  const [monthDay, setMonthDay] = useState(monthDayMap);
+  const [monthValue, setMonthValue] = useState(1)
+  const [yearValue, setYearValue] = useState(2010)
+  const [monthDay, setMonthDay] = useState(monthDayMap)
+  const [dayValue, setDayValue] = useState(1)
+  const [days, setDays] = useState([{value: '1', label: '1'}])
+  const[maxDays, setMaxDays] = useState(31);
+  
 
   const handleMonthChange = (e) => {
     setMonthValue(e.target.value)
@@ -32,11 +34,35 @@ function App() {
     setMonthDay(updatedMonthDayMap)
   }
 
+  console.log("MonthDay:",monthDay)
+
+  useEffect(() => {
+    setMaxDays(monthDay[monthValue - 1].label);
+    const dayOptions = Array.from({ length: maxDays }, (_, i) => ({
+      value: (i + 1).toString(),
+      label: (i + 1).toString(),
+    }));
+
+    setDays(dayOptions);  // state update
+
+  }, [monthValue, monthDay, maxDays]);  // re-run whenever monthValue, monthDay or maxDays change
+
+  // log days in a separate useEffect or after the state update
+  useEffect(() => {
+      console.log("Days:", days);
+  }, [days]);  // log when days state is updated
+  
+ 
   return (
     <>
       <div style={{ textAlign: 'center', marginTop: '20px', backgroundColor: ' #751aff', display: 'flex', borderWidth: '3px', borderStyle: 'solid', borderColor: 'black', justifyContent: 'center' }}>
-        <Dropdown options={options} dropdownValue={monthValue} handleChange={handleMonthChange}/>
-        <Dropdown options={options2} dropdownValue={yearValue} handleChange={handleYearChange}/>
+        <Dropdown options={months} dropdownValue={monthValue} handleChange={handleMonthChange}/>
+        <Dropdown options={year} dropdownValue={yearValue} handleChange={handleYearChange}/>
+        <Dropdown
+          options={days}
+          dropdownValue={dayValue}
+          handleChange={(e) => setDayValue(e.target.value)}
+        />
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-export const options = [
+export const months = [
     { value: '1', label: 'Jan' },
     { value: '2', label: 'Feb' },
     { value: '3', label: 'Mar' },
@@ -13,7 +13,6 @@ export const options = [
     { value: '12', label: 'Dec' },
   ];
 
-export const options2 = generateOptions2();
 
 export const monthDayMap = [
     { value: '1', label: '31' },
@@ -30,13 +29,13 @@ export const monthDayMap = [
     { value: '12', label: '31' },
 ]
 
-
-
-function generateOptions2(){
+function generateYear(){
     let options = [];
     for (let i = 1950; i < 2050; i++) {
         options.push({ value: i, label: i });
     }
     return options;
 }
+
+export const year = generateYear();
 
